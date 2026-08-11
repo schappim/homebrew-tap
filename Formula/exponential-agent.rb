@@ -20,8 +20,11 @@ class ExponentialAgent < Formula
     # launchd hands the job a bare PATH. The agent shells out to Claude Code and
     # Codex, which in turn reach for git, node and whatever the session's project
     # needs, so seed it with the usual prefixes rather than letting sessions fail
-    # with "command not found" in ways that look like app bugs.
-    environment_variables PATH: std_service_path_env
+    # with "command not found" in ways that look like app bugs. ~/.local/bin is
+    # where Claude Code's native installer puts `claude`, and it is not in
+    # std_service_path_env; without it a backgrounded agent can register fine and
+    # then fail every session it is asked to start.
+    environment_variables PATH: "#{Dir.home}/.local/bin:#{std_service_path_env}:/usr/local/bin"
   end
 
   def caveats
@@ -58,7 +61,7 @@ class ExponentialAgent < Formula
     ENV["XDG_CONFIG_HOME"] = testpath/"config"
     system bin/"exponential-agent", "setup", "--url", "https://example.com", "--token", "test-token"
     config = testpath/"config/exponential-agent/config.json"
-    assert_predicate config, :exist?
+    assert_path_exists config
     assert_equal "100600", config.stat.mode.to_s(8)
     assert_match "https://example.com", config.read
   end
