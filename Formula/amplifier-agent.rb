@@ -42,9 +42,16 @@ class AmplifierAgent < Formula
 
         brew services start amplifier-agent
 
-      Claude sessions use this machine's Claude Code login, so run `claude` and
-      sign in once before starting a session. Codex sessions use the Codex CLI
-      login or CODEX_API_KEY.
+      Claude sessions run on this machine's Claude Code login, which is separate
+      from the agent. If you don't have Claude Code yet:
+
+        brew install --cask claude-code && claude
+
+      and sign in once. Codex sessions use the Codex CLI login or CODEX_API_KEY.
+
+      Under `brew services` the agent logs to:
+
+        #{var}/log/amplifier-agent.log
     EOS
   end
 
