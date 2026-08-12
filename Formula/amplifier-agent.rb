@@ -1,8 +1,8 @@
 class AmplifierAgent < Formula
   desc "Run Claude Code and Codex sessions on this machine, driven from Amplifier"
   homepage "https://github.com/schappim/amplifier_client"
-  url "https://github.com/schappim/amplifier_client/releases/download/v1.0.1/amplifier-agent-1.0.1.tar.gz"
-  sha256 "146a97d025ca27e535af4069ffc9a8fe13efb4218ae959e60f85ce5bf194028d"
+  url "https://github.com/schappim/amplifier_client/releases/download/v1.1.0/amplifier-agent-1.1.0.tar.gz"
+  sha256 "f05895834d3febd54ac65e9637e45990a77dc3d0d4c4ac0920376ff157705e77"
   license "MIT"
 
   depends_on "node"
